@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang = "en">
+
+	<head>
+        <meta charset = "UTF-8">
+        <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+        <meta http-equiv = "X-UA-Compatible" content = "ie = edge">
+		
+        <link rel = "stylesheet" href = "variables.css">
+		<link rel = "stylesheet" href = "style.css">
+		<!-- <link rel = "icon" href = "img/logo1.png" type = "image/x-icon"> -->
+		
+        <script src = "script.js" defer></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+        
+		<title>ARD</title>
+	</head>
+
+	<body>
+	
+		<div class = "heightDiv headerHeightDiv">
+			<div class = "widthDiv headerWidthDiv">
+				
+				<!-- <img class = "wallpaperImg headerWallpaperImg" src = "img/wallpaper6.jpg"> -->
+				
+				<!-- <div onclick = "headerItemClick(1);" class = "headerItem headerLogoDiv">  -->
+					<!-- <img class = "headerLogoImg headerLogoImg1" src = "img/logo1.png"> -->
+					<!-- <img class = "headerLogoImg headerLogoImg2" src = "img/logo2.png"> -->
+				<!-- </div> -->
+				
+				<p onclick = "headerItemClick(1);" class = "headerItem headerP">MENU 1</p>
+				<p onclick = "headerItemClick(2);" class = "headerItem headerP">MENU 2</p>
+				<p onclick = "headerItemClick(3);" class = "headerItem headerP">MENU 3</p>
+				<p onclick = "headerItemClick(4);" class = "headerItem headerP">MENU 4</p>
+			</div>
+		</div>
+		
+		<div class = "heightDiv">
+			<div class = "widthDiv homeWidthDiv">
+			
+				<!-- <img class = "wallpaperImg homeWallpaperImg" src = "img/wallpaper6.jpg"> -->
+				
+				<div id = "homeBotDiv" class = "homeBotDiv">
+					<div id = "homeBotLeftDiv" class = "homeBotLeftDiv">
+						
+					</div>
+					<div id = "homeBotCenterDiv" class = "homeBotCenterDiv">
+						
+					</div>
+					<div id = "homeBotRightDiv" class = "homeBotRightDiv">
+						
+					</div>
+				</div>
+				
+				<div class = "homeTopDiv">
+					<p onclick = "sendClick();" class = "homeTopP">SEND</p>
+					<p onclick = "updateClick(1);" class = "homeTopP">UPDATE(I)</p>
+					<p onclick = "updateClick(2);" class = "homeTopP">UPDATE(S)</p>
+					<!-- <input id = "homeInput" class = "homeInput" type="text"> -->
+					<p onclick = "resumeClick();" id = "homeTopResumeButtonP" class = "homeTopP">RESUME</p>
+					<p onclick = "clearClick();" class = "homeTopP">CLEAR</p>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class = "heightDiv">
+			<div class = "widthDiv infoWidthDiv">
+				<!-- <p class = "infoTopP">ETHERNET_SHIELD_INIT_STATUS = 0</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_DHCP_INIT_STATUS = 1</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_DHCP_FAILED_STATUS = 2</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_NO_SHIELD_STATUS = 3</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_NO_CABLE_STATUS = 4</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_IP_INSTEAD_OF_DHCP_INIT_STATUS = 5</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_CONNECTING_TO_SERVER_STATUS = 6</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_CONNECTION_FAILED_STATUS = 7</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_CONNECTION_SUCCESSFUL_STATUS = 8</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_SENDING_DATA_STATUS = 9</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_RECEIVING_DATA_STATUS = 10</p> -->
+				<!-- <p class = "infoTopP">ETHERNET_DATA_SUCCESSFULLY_RECEIVED_STATUS = 11</p> -->
+			</div>
+		</div>
+	
+	</body>
+
+</html>

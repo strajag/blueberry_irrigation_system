@@ -1,0 +1,223 @@
+/* DEFAULTS */
+html
+{
+	scroll-behavior: smooth;
+}
+
+*
+{
+	margin: 0;
+	padding: 0;
+	font-family: var(--defaultFont);
+	transition: var(--defaultTransition);
+}
+
+body
+{
+	background-color: var(--defaultBackground);
+	color: var(--defaultFontColor);
+	
+	/* center body when window is less than min size */
+	min-width: var(--MINWIDTH);
+	
+	/* disable text selection */
+	user-select: none; /* supported by chrome and opera */
+   -webkit-user-select: none; /* safari */
+   -webkit-touch-callout: none; /* ios safari */
+   -khtml-user-select: none; /* konqueror html */
+   -moz-user-select: none; /* firefox */
+   -ms-user-select: none; /* internet explorer/edge */
+   
+   /* disable phone touch/press highlight */
+   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+   -webkit-tap-highlight-color: transparent;
+}
+
+/* html, body */
+/* { */
+	/* prevents fixed header to auto hide on mobiles */
+    /* overflow: auto; */
+/* } */
+
+body, div
+{
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	width: var(--defaultBodyAndDivWidth);
+	height: var(--defaultBodyAndDivHeight);
+}
+
+.heightDiv
+{
+	height: var(--defaultPageHeight);
+}
+
+.widthDiv
+{
+	width: var(--defaultPageWidth);
+}
+
+.headerHeightDiv
+{
+	position: sticky;
+	top: 0;
+	justify-content: start;
+	height: var(--defaultHeaderHeight);
+	background-color: var(--defaultBackground);
+	z-index: 1;
+}
+
+a
+{
+	text-decoration: none;
+	color: var(--defaultFontColor);
+}
+
+/* custom */
+.heightDiv
+{
+	border-bottom: var(--heightDivBorderBottom);
+	scroll-margin-top: var(--defaultHeaderHeight);
+}
+
+.widthDiv
+{
+	border-left: var(--heightDivBorderBottom);
+	border-right: var(--heightDivBorderBottom);
+}
+
+.wallpaperImg
+{
+	position: absolute;
+	z-index: -1;
+	width: var(--wallpaperImgWidth);
+	height: var(--defaultPageHeight);
+	object-fit: none;
+	object-position: var(--wallpaperImgObjectPosition);
+}
+
+/* header */
+
+.headerWallpaperImg
+{
+	height: var(--headerWallpaperImgHeight);
+	object-position: var(--headerWallpaperObjectPosition);
+}
+
+.headerWidthDiv
+{
+	flex-direction: row;
+	font-size: var(--headerFontSize);
+}
+
+.headerLogoDiv
+{
+	flex-direction: row;
+	justify-content: space-between;
+	width: var(--headerLogoDivWidth);
+	cursor: pointer;
+}
+
+.headerLogoImg
+{
+	height: var(--headerLogoImgHeight);
+	transition: none;
+}
+
+.headerP
+{
+	cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) /* this will fix hover sticks on mobile phones (it says hover just for devices that support hover) */
+{
+    .headerItem:hover
+	{
+		opacity: var(--headerItemHoverOpacity);
+	}
+
+	.headerP:hover
+	{
+		padding-bottom: var(--headerPhoverPadding);
+	}
+}
+
+.headerP:active
+{
+	transition: none;
+	opacity: var(--headerItemActiveOpacity);
+	color: var(--headerPactiveFontColor);
+	transform: var(--headerItemActiveTransform);
+}
+
+.headerLogoDiv:active
+{
+	transition: none;
+	opacity: var(--headerItemActiveOpacity);
+	transform: var(--headerItemActiveTransform);
+}
+
+/* home */
+
+/* home top */
+
+.homeTopDiv
+{
+	height: var(--homeTopDivHeight);
+	flex-direction: row;
+}
+
+.homeTopP, .homeInput
+{
+	font-size: var(--homeTopPfontSize);
+	cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine)
+{
+    .homeTopP:hover
+	{
+        opacity: var(--homeTopPhoverOpacity);
+    }
+}
+
+.homeTopP:active
+{
+	transition: none;
+	color: var(--homeTopPactiveFontColor);
+	transform: var(--homeTopPactiveTransform);
+}
+
+/* home bot */
+
+.homeBotDiv
+{
+	height: var(--homeBotDivHeight);
+	/* justify-content: right; */
+	flex-direction: row;
+}
+
+.homeBotLeftDiv
+{
+	height: var(--homeBotDivHeight);
+	/* justify-content: start; */
+	align-items: flex-end;
+}
+
+.homeBotCenterDiv
+{
+	height: var(--homeBotDivHeight);
+	/* justify-content: start; */
+	max-width: 10%;
+}
+
+.homeBotRightDiv
+{
+	height: var(--homeBotDivHeight);
+	/* justify-content: start; */
+	align-items: flex-start;
+}

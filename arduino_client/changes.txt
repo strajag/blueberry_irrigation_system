@@ -1,0 +1,185 @@
+version 0-1-11
+	-tested
+    -currently using
+
+changes
+	-changed in file "control-flow.h" in enum "Control_flow_faulty_detection_status" variable order
+	-added in file "control-flow.h" in enum "Control_flow_faulty_detection_status" new variable "CONTROL_FLOW_FAULTY_DETECTION_STATUS_DETECTED_PRESSURE_ZERO"
+	-added in file "control-flow.cpp" in function "control_flow_update()" new code for detecting zero pressure and adjusted code for that change
+
+version 0-1-10
+	-tested
+    -currently using
+
+changes
+    -changed in file "sensor-flow.cpp" variable "pulses_per_liter" value from "5880" to "5715" for micro and macro sensor
+    -added in file "control-flow.h" new enum "Control_flow_faulty_detection_status" to replace bool variable "control_flow_faulty_detected" and indicate detection status and adjusted code for that change
+    -removed in file "control-flow.cpp" in function "control_flow_start()" code that toggles supplements pump, it's not needed
+    -adjusted in file "control-flow.cpp" in function "control_flow_update()" code to fix faulty flow detection bug
+    -added in file "control-irrigation-temp.cpp" in function "control_irrigation_temp_start()" code to reset water sensor flow pulses when starting irrigation
+    -adjusted in file "control-irrigation-temp.cpp" in function "control_irrigation_temp_force_stop()" to set variable "control_irrigation_temp_is_stopped" value with faulty detection status if occured as temporary solution to send status to server
+    -added in file "control-irrigation-temp.cpp" in function "control_irrigation_update()" log for faulty detection
+
+version 0-1-9
+	-tested
+    -currently using
+
+changes
+    -migrated from arduino ide project to clion ide with platformio core and plugin project
+    -renamed "field-irrigation-system-v0-1-9.ino" file to "main.cpp"
+    -added in "main.cpp" file in "setup(void)" and "loop(void)" functions watchdog timer code to restart arduino if stuck for 8s
+    -removed in "internet.cpp" file in "internet_ip_remote_update(void)" function "Serial.println(internet_ip_remote)" function call
+    -removed in "control-irrigation-temp.cpp" file in "control_irrigation_temp_resume(void)" and "control_irrigation_temp_update(void)" functions "device_toggle(device_array[9], TRUE/FALSE)" function call to fix a bug that is toggling water valve when it doesn't need to
+    -removed in "control-irrigation-temp.cpp" file in "control_irrigation_temp_resume(void)" function "device_toggle(&device_array[3], TRUE);" function call, code in "control-flow.cpp" file will be responsible for toggling supplement pump when needed
+    -added in "control-irrigation-temp.cpp" file in "control_irrigation_temp_force_stop(void)" function in "if()" statement to check if "control_irrigation_temp_is_stopped" variable is "TRUE" to fix bug that causes to not resume when calling "control_irrigation_temp_resume(void)" function when stopping irrigation when program is preparing generator after resuming program
+    -added in file "control-irrigation-temp.cpp" in function "control_irrigation_temp_update(void)" to detect faulty flow and stop all
+	-added in file "control-irrigation-temp.cpp" new function "control_irrigation_temp_faulty_detection_toggle(bool_t is_active)"
+	-changed in file "control-irrigation-temp.cpp" in function "control_irrigation_temp_force_stop(void)" to call function "control_safety_devices_stop(void)" instead of stopping devices itself
+	-changed in file "control-irrigation-temp.cpp" variable "control_irrigation_temp_time_generator_wait" value from "10000" to "5000"
+	-changed in "control-flow.cpp" supplements micro to be controlled by micro valve and supplements pump instead of click pump
+    -added in "control-flow.cpp" file in "control_flow_update(void)" function to toggle on supplements pump when needed
+    -added in "control-flow.cpp" file in "control_flow_update(void)" function to toggle on/off water valve when both micro and macro valves are off/on
+    -added in file "control-flow.h/cpp" in function "control_flow_update(void)" faulty flow detection
+    -added in file "control-safety.h/cpp" new function "control_safety_devices_stop(void)" to stop all devices when called
+    -added in "pins.h" and "device.h/cpp" and files new lamp device
+	-changed in file "device.cpp" variable "time_switch_minimum" for micro, macro and water valves to "5" 
+	-changed in file "internet.h" define "INTERNET_REMOTE_PORT" from 7010 to 53010
+    -added in file "interface.h/cpp" define "INTERFACE_COMMAND_CONTROL_IRRIGATION_IS_FAULTY_DETECTION_ACTIVE" to toggle faulty detection
+    -changed in file "sensor-flow.cpp" variable "pulses_per_liter" value from "9200" to "5880" for micro sensor as now micro valve will control flow instead of click pump
+
+problems
+	-need calibration correction for micro or macro flow sensor
+
+known bugs
+	-faulty flow detection don't work as intended, it detects faulty flow when it's not faulty
+
+version 0-1-8
+	-tested
+
+changes
+	-changed in all files all "debug_printf" functions to "debug_log" macro as now debugging in "my-library.h" is updated
+	-changed in "my-library.h" debugging level to 0
+	-changed in "internet.c" in "internet_send()" function all "debug_log(udp.write())" functions to just "udp.write()" as there was problem when "my-library.h" is updated to use "debug_log()" instead of "debug_printf()" that cause to send wrong data to server
+	-removed in "control-irrigation-temp.c" supplement pump and water valve from turning on/off when program is "CONTROL_IRRIGATION_TEMP_PROGRAM_CLEANING" as now supplement pump cleaning is not needed 
+	-changed in "control-flow.c" supplements micro to be controlled by click pump instead of supplements pump and adjusted code in "control_flow_start()" and "control_flow_update()" for that change as now click pump controls micro and supplement pump/valves control macro supplement
+	-changed in "sensor-flow.c" supplements micro calibration number "pulses_per_liter" from 5715 to 9200 as now click pump controls micro supplement
+
+known bugs
+	-(fixed)in "control-irrigation-temp.c" code is not removed to stop using water valve for cleaning so water valve is turning on/off when program is "CONTROL_IRRIGATION_TEMP_PROGRAM_CLEANING" in "control_irrigation_temp_resume()" and "control_irrigation_temp_update()" function
+
+version 0-1-7
+    -tested
+
+changes
+	-adjusted in "control-irrigation-temp.c" not start supplement pump and valves when "control_irrigation_temp_deliver_volume == 1"
+	-added in "control-irrigation-temp.c" to clean supplement pump with water when program is cleaning
+	-changed in "internet.c" to immediately hard restart ethernet shield when "internet_troubleshoot()" function is called instead of checking connection with router
+	-changed in internet service provider wan port, now there is no problem with arduino loosing connection with server every few days
+
+version 0-1-6
+    -tested
+
+changes
+    -adjusted in control_flow.c and control-irrigation-temp.c to toggle on/off valves instead of supplement pump and supplement pump will be on whole time as control flow is active as now we fixed solenoid valves
+    -added new sensor-pressure.h/c file to read water pressure and adjusted code in pins.h and interface.h/c for that change
+    -adjusted in sensor-flow.c pulses_per_liter for micro 5080 and macro 4886 to 5715 both as now with new solenoids need new calibration
+    -adjusted in device.c time_switch_minimum for micro and macro from 20 to 10 as now new solenoids can switch faster without heating
+    -added in device.h/c new device garden valve and adjusted code for that change in pins/h, control-flow.h/c and interface.h/c
+    -added in control-irrigation-temp.c code for valve garden automation
+	-added in internet.c in internet_ip_remote_update() function code to print ip address in serial
+
+version 0-1-5
+	-tested
+
+changes
+	-changed in internet.h INTERNET_TIME_RESTART_WAIT 1000LU to INTERNET_TIME_RESTART_WAIT 3000LU to fix bug when restarting internet
+	-added in internet.h/c INTERNET_STATUS_INITIALIZING status and adjusted code in internet_update() function to fix bug when restarting internet
+	-reverted back reset wires for arduino and internet as it was before
+
+problems
+	-(fixed)everything worked as intended for 3-4 months then arduino started to lose connection with server every few day but arduino is getting correct ip from router from dns so problem is something like firewall on isp router
+
+version 0-1-4
+	-tested
+
+notes
+	-arduino wire from reset pin to pin 48 is removed and ethernet reset pin is removed from pin 49 and wired with arduino reset pin as temporary solution for ethernet shield reset arduino freeze bug
+
+changes
+    -changed in internet.h INTERNET_REMOTE_HOSTNAME from straykovsky.my.to to straykovsky.ddns.net as now i am using noip.com dns service instead of freedns.afraid.org as TTL from noip is 60s unlike freedns 1h
+    -changed in internet.c from pinging only if nothing is sent for 10s to ping every 10s regardless if something is sent
+    -changed in internet.h INTERNET_TIME_PING_SEND_INTERVAL 10000LU to 5000LU
+    -changed in internet.h INTERNET_TIME_RECEIVE_LAST_MAX 60000LU to 17000LU
+    -changed in interface.c in interface_process_data() to send control irrigation all info regardless if control irrigation program is active or not
+    -added in interface.c to answer ping requests if server send
+    -changed in control-irrigation-temp.h/c control_irrigation_temp_stop() to control_irrigation_temp_force_stop()
+    -added in control-irrigation-temp.h/c function to resume stooped program and adjusted code according to to that change
+    -added new control-safety.h/c file with only one function for now to reset arduino if needed
+    -added in interface-serial.h/c command to stop and resume control irrigation program and to reset arduino and to ping server
+    -added in interface.h/c command to resume stopped control irrigation program and to reset arduino
+
+known bugs
+	-(fixed)when ethernet is reset with hard_reset() with reset pin then internet wont initialize
+
+version 0-1-3
+    -tested at field
+
+changes
+    -removed http send and receive code in internet header and source as now i have domain that points directly to my server ip and adjusted internet header and source code according to that change
+    -adjusted internet header and source code
+    -added internet_troubleshoot() function in internet.h/c to detect and fix problem with internet connection
+    -adjusted internet_receive() function in internet.h/c to check is packet received from same ip as remote server ip
+    -adjusted internet_ip_remote_update() function in internet.h/c to return bool_t instead of void on success
+    -added status ready check in internet_ip_remote_update() and internet_send() function in internet.h/c
+    -added internet commands in interface.h/c
+    -added stop function in control-irrigation-temp.h/c
+
+todo
+    -code udp data parity check or checksum or any error detection shit in internet.h/c
+
+known bugs
+    -(fixed)in internet.h/c in internet_update() function if i dont put delay() after digitalWrite(INTERNET_PIN_RESET, HIGH); then dhcp will fail on W5100 when calling internet_restart_hard() function, W5500 isn't tested
+    -(fixed)when ip of hostname is changed then dns needs time (about 1h) to revalidate ip
+
+notes
+    -in internet.h/c if any function from ethernet/udp library (stop, receive, read, write...) is called before hardware initialization or after hardware reset (hardware.begin, udp.begin, connect...) then program will freeze
+
+version 0-1-2
+	-tested at field
+
+changes
+    -changed flow-control names to control-flow
+    -adjusted debug_printf text in control-flow update() function to print device pin
+    -changed user-interface names to interface
+    -changed user-interface-serial names to interface-serial
+    -added new control-irrigation header and source code
+    -adjusted and added new controls in interface-serial for control-flow and control-irrigation
+    -changed in sensor-flow.c function name sensor_flow_pulses_set to sensor_flow_pulses_per_liter_set and sensor_flow_pulses_total_set to sensor_flow_pulses_total_set
+    -adjusted sensor_flow_pulses_total_set function to set total pulses to given input instead of setting only to zero and adjusted interface-serial according to that change
+    -added new control-irrigation-temp header and source code just temporary till control-irrigation.h/c is finished and added commands in interface-serial.c
+
+version 0-1-1
+	-tested at field
+	
+problems
+	-(fixed)there is no flow thought valves on supplements pump as there is no enough pressure to lift membrane in valves
+	-(fixed)noise from switching on/off 220v supplements pump and 12v click pump with secondary (not 5v arduino relay) relay is triggering interrupt
+	-(fixed)noise from switching on/off main well pump with switch (not with relay or with pressure relay) is triggering interrupt
+
+known bugs
+	-when supplement water flow meter is counting pulses then well flow meter is also counting same pulses as they are on same pin
+
+changes
+	-as valves on supplements pump didn't work (not enough pressure to open valve) flow-control is changed to switch on/off supplements pump instead of valves as valves are removed
+	-adjusted pulses per liter for micro and macro sensor-flow
+	-adjusted valves minimum switch time from 1 to 2 seconds
+	-added option to serial print sensor-flow pulses
+	-added one debug_printf in flow-control update() function to serial print when flow-control is finished
+
+version 0-1-0
+	-checkpoint
+	-tested at home
+	-not used on field
+
+possible bugs
+	-what will happen if flow-control is resumed without previous pausing

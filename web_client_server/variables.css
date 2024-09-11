@@ -1,0 +1,49 @@
+:root
+{
+	/* defaults */
+	--defaultFont: "Times New Roman", Georgia, serif;
+	--defaultFontColor: #FFFFFF;
+	--defaultTransition: all 0.4s ease;
+	--defaultBackground: #000000;
+
+	--defaultBodyAndDivWidth: 100%;
+	--defaultBodyAndDivHeight: 100%;
+	--defaultHeaderHeight: max(var(--HEADERMINH), var(--HEADERH));
+	--defaultPageWidth: max(var(--MINWIDTH), var(--WIDTH));
+	--defaultPageHeight: clamp(max(calc(var(--WIDTH) / 2.2), var(--MINHEIGHT)), calc(var(--HEIGHT) - var(--defaultHeaderHeight)), calc(var(--WIDTH) * 2.2));
+
+	/* settings */
+	--MINWIDTH: 20rem;
+	--MINHEIGHT: 20rem;
+	--WIDTH: 95vw;
+	--HEIGHT: 100vh;
+	--HEADERMINH: 3.125rem;
+	--HEADERH: calc(var(--WIDTH) * 0.05);
+
+	/* custom */
+	--heightDivBorderBottom: 0.0625rem solid white;
+	--wallpaperImgWidth: 100%;
+	--wallpaperImgObjectPosition: 50% calc(var(--defaultHeaderHeight) * -1);
+	--headerWallpaperImgHeight: calc(var(--defaultHeaderHeight) - 0.0625rem); /* MINUS BORDER */
+	--headerWallpaperObjectPosition: 50% 0;
+	
+	/* header */
+	--headerFontSize: calc(var(--defaultHeaderHeight) * 0.25);
+	--headerLogoDivWidth: calc(var(--defaultHeaderHeight) * 1.75);
+	--headerLogoImgHeight: 85%;
+	--headerItemHoverOpacity: 0.5;
+	--headerItemActiveOpacity: 1;
+	--headerItemActiveTransform: scale(0.9, 0.9);
+	--headerPhoverPadding: calc(var(--defaultHeaderHeight) * 0.2);
+	--headerPactiveFontColor: red;
+	
+	/* home */
+	/* home top */
+	--homeTopDivHeight: 10%;
+	--homeTopPfontSize: min(calc(var(--defaultPageWidth) * 0.04), calc(var(--defaultPageHeight) * 0.04));
+	--homeTopPhoverOpacity: 0.5;
+	--homeTopPactiveFontColor: red;
+	--homeTopPactiveTransform: scale(0.9, 0.9);
+	/* home bot */
+	--homeBotDivHeight: 100%;
+}
